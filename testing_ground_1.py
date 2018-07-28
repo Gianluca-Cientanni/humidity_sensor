@@ -22,6 +22,7 @@ dict = {"Data Type": ["Temperature", "Humidity", "Wall Temperature", "Dew Point"
             "Value": [tempF, humF, wallTempF, dp_array, emc_array]}
 
 
+
 #########################
 # TRANSLATE SERIAL DATA #
 ########################
@@ -63,55 +64,54 @@ while True:  # While loop that loops forever
     isotherm_80 = (187333) * math.exp((-0.571) * (emc_array[emc_size]))
     isotherm_85 = (162897) * math.exp((-0.568) * (emc_array[emc_size]))
 
-    print(isotherm_60)
 
-    if tempF[temp_size] <= 16 or emc_array[emc_size] < 13.5:
-        print("Low Risk")
 
-    else:
-        print("Days till mold is: ", isotherm_60)
-
-    if tempF[temp_size] <= 18 or emc_array[emc_size] < 13.2:
-        print("Low Risk")
+    if (16.0 < wallTempF[temp_size] <= 18):
+        print("Days till mold is", isotherm_60)
 
     else:
-        print("Days till mold is: ", isotherm_65)
+        continue
 
-    if tempF[temp_size] <= 21 or emc_array[emc_size] < 12.2:
-        print("Low Risk")
-
-    else:
-        print("Days till mold is: ", isotherm_70)
-
-    if tempF[temp_size] <= 24 or emc_array[emc_size] < 11.9:
-        print("Low Risk")
+    if (18 < wallTempF[temp_size] <= 21):
+            print("Days till mold is", isotherm_65)
 
     else:
-        print("Days till mold is: ", isotherm_75)
+        continue
 
-    if tempF[temp_size] <= 27 or emc_array[emc_size] < 11.7:
-        print("Low Risk")
-
-    else:
-        print("Days till mold is: ", isotherm_80)
-
-    if tempF[temp_size] <= 29 or emc_array[emc_size] < 11.6:
-        print("Low Risk")
+    if (21 < wallTempF[temp_size] <= 24):
+            print("Days till mold is", isotherm_70)
 
     else:
-        print("Days till mold is: ", isotherm_85)
+        continue
 
-    continue
+    if (24 < wallTempF[temp_size] <= 27):
+            print("Days till mold is", isotherm_75)
+
+    else:
+        continue
+
+    if (27 <= wallTempF[temp_size] <= 29):
+            print("Days till mold is", isotherm_80)
+
+    else:
+        continue
+
+    if (wallTempF[temp_size] > 29):
+            print("Days till mold is: ", isotherm_85)
+
+    else:
+        continue
+
+    #def function_fitter(argument):
+    #    selector = {
+    #        1: isotherm_60,
+    #        2: isotherm_65,
+    #        3: isotherm_70,
+    #        4: isotherm_75,
+    #        5: isotherm_80,
+    #        6: isotherm_85
+    #    }
 
 
-    def function_fitter(argument):
-        selector = {
-            1: isotherm_60,
-            2: isotherm_65,
-            3: isotherm_70,
-            4: isotherm_75,
-            5: isotherm_80,
-            6: isotherm_85
-        }
 
-        print(selector.get(argument, "Low Risk"))
+    #    print(selector.get(argument, "Low Risk"))
