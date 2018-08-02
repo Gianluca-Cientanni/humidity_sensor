@@ -6,7 +6,7 @@ import pandas as pd
 # DEFINE VARIABLES #
 ###################
 
-ser = serial.Serial('/dev/cu.usbmodem1411')
+ser = serial.Serial('/dev/cu.usbmodem1421') # Change serial port number if needed, tells what port on Arduino IDE
 ser.flushInput()
 tempF = []
 humF = []
@@ -39,9 +39,9 @@ while True:  # While loop that loops forever
     decoded_bytes_hum = float(ser_bytes_2[0:len(ser_bytes_2) - 2].decode("utf-8"))
     humF.append(decoded_bytes_hum)
 
-    ser_bytes_3 = ser.readline()
-    decoded_bytes_wallTemp = float(ser_bytes_3[0:len(ser_bytes_3) - 2].decode("utf-8"))
-    wallTempF.append(decoded_bytes_wallTemp)
+    #ser_bytes_3 = ser.readline()
+    #decoded_bytes_wallTemp = float(ser_bytes_3[0:len(ser_bytes_3) - 2].decode("utf-8"))
+    #wallTempF.append(decoded_bytes_wallTemp) # Wall sensor wouldn't fit in box so had to ditch
 
     dp_c_float = tempF[temp_size] - (20 - humF[hum_size] / 5)  # Calculating dew point
     dp_c = round(dp_c_float, 2)
@@ -102,16 +102,3 @@ while True:  # While loop that loops forever
     else:
         continue
 
-    #def function_fitter(argument):
-    #    selector = {
-    #        1: isotherm_60,
-    #        2: isotherm_65,
-    #        3: isotherm_70,
-    #        4: isotherm_75,
-    #        5: isotherm_80,
-    #        6: isotherm_85
-    #    }
-
-
-
-    #    print(selector.get(argument, "Low Risk"))
